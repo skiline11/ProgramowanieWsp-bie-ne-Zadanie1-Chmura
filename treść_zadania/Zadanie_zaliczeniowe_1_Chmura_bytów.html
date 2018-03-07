@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0072)https://www.mimuw.edu.pl/~janowska/PW-LAB/Zadania/Zadanie1/zadanie1.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <title>Zadanie zaliczeniowe 1: Chmura bytów</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Zadanie zaliczeniowe 1: <em>Chmura bytów</em></h1>
+</div>
+<p>Termin wysyłania rozwiązań upływa 27 listopada 2017 roku o godz. 21:00.</p>
+<hr>
+<h1 id="wprowadzenie">Wprowadzenie</h1>
+<p><em>Chmura bytów</em> wymiaru <code>n</code> przyporządkowuje <em>bytom</em> miejsca, jednoznacznie identyfikowane przez ciąg <code>n</code> współrzędnych całkowitych. Zachowuje przy tym <em>niezmiennik chmury</em>: <strong>każdy byt jest w innym miejscu</strong>.</p>
+<p>Chmura bytów może służyć do synchronizacji procesów współbieżnych.</p>
+<h1 id="specyfikacja">Specyfikacja</h1>
+<p>W pakiecie <code>chmura</code>, implementującym w Javie chmurę bytów wymiaru <code>2</code>, jest definicja typu <code>Byt</code>, kontrolowanego wyjątku <code>NiebytException</code> i klasy <code>Chmura</code>.</p>
+<p>Klasa <code>Chmura</code> ma dwa publiczne konstruktory i cztery publiczne obiektowe metody.</p>
+<ul>
+<li><p>Konstruktor</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">Chmura</span>()</code></pre>
+<p>buduje chmurę, która w stanie początkowym nie ma żadnego bytu.</p></li>
+<li><p>Konstruktor</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">Chmura</span>(BiPredicate&lt;Integer, Integer&gt; stan)</code></pre>
+<p>buduje chmurę, której początkową zawartość określa dwuargumentowy predykat <code>stan</code>. W miejscu <code>(x, y)</code> jest byt wtedy i tylko wtedy, gdy <code>stan.test(x, y)</code> ma wartość <code>true</code>.</p></li>
+<li><p>Metoda</p>
+<pre class="sourceCode java"><code class="sourceCode java">Byt <span class="fu">ustaw</span>(<span class="dt">int</span> x, <span class="dt">int</span> y) <span class="kw">throws</span> InterruptedException</code></pre>
+<p>daje jako wynik nowy byt, dodany do chmury w miejscu <code>(x, y)</code>.</p></li>
+<li><p>Metoda</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="dt">void</span> <span class="fu">przestaw</span>(Collection&lt;Byt&gt; byty, <span class="dt">int</span> dx, <span class="dt">int</span> dy) <span class="kw">throws</span> NiebytException, InterruptedException</code></pre>
+<p>przemieszcza na raz wszystkie byty kolekcji <code>byty</code> o wektor <code>(dx, dy)</code>. Byt z miejsca <code>(x, y)</code> trafia na miejsce <code>(x + dx, y + dy)</code>.</p>
+<p>Jeśli którykolwiek z bytów kolekcji <code>byty</code> nie jest w chmurze, metoda zgłasza wyjątek <code>NiebytException</code>.</p>
+<p>Jeżeli wymaga tego niezmiennik chmury, metody <code>ustaw()</code> i <code>przestaw()</code> wstrzymują wątek do czasu, gdy ich wykonanie będzie możliwe. W przypadku przerwania zgłaszają wyjątek <code>InterruptedException</code>.</p></li>
+<li><p>Metoda</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="dt">void</span> <span class="fu">kasuj</span>(Byt byt) <span class="kw">throws</span> NiebytException</code></pre>
+<p>usuwa <code>byt</code> z chmury.</p>
+<p>Jeśli <code>byt</code> nie jest w chmurze, metoda zgłasza wyjątek <code>NiebytException</code>.</p></li>
+<li><p>Metoda</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="dt">int</span>[] <span class="fu">miejsce</span>(Byt byt)</code></pre>
+<p>daje dwuelementową tablicę ze współrzędnymi <code>x</code> i <code>y</code> bytu, lub <code>null</code>, jeśli <code>byt</code> nie jest w chmurze.</p></li>
+</ul>
+<h1 id="polecenie">Polecenie</h1>
+<ul>
+<li><p>(8 pkt)</p>
+<p>Zrealizuj w Javie chmurę bytów wymiaru <code>2</code>. Do pakietu <code>chmura</code> dołącz wszystkie potrzebne definicje pomocnicze.</p></li>
+<li><p>(2 pkt)</p>
+<p>Napisz dwa programy przykładowe, demonstrujące zastosowanie chmury bytów do synchronizacji wątków. W pierwszym programie rozwiąż problem producentów i konsumentów a w drugim problem czytelników i pisarzy.</p></li>
+</ul>
+<h1 id="uwagi">Uwagi</h1>
+<ul>
+<li><p>Program ma być w wersji 8 języka Java. Powinien się kompilować i działać na komputerze <code>students</code>.</p></li>
+<li><p>Wolno korzystać wyłącznie z pakietów <code>java.lang</code> i <code>java.util</code>, w tym z <code>java.util.function</code> i <code>java.util.concurrent</code>.</p></li>
+<li><p>Można zignorować fakt, że zakres typu <code>int</code> jest ograniczony.</p></li>
+<li><p>Implementacja nie musi gwarantować, że wątek nie zostanie zagłodzony.</p></li>
+<li><p>Warto zadbać o właściwą obsługę przerwań.</p></li>
+<li><p>Rozwiązanie wysyłamy pocztą elektroniczną, jako załącznik do listu, na adres <code>zaroda@mimuw.edu.pl</code>. W załączniku powinien być właściwy plik, nie odnośnik do niego, jak to jest w przypadku listów wysłanych przez <em>USOSmail</em>.</p></li>
+<li><p>Należy wysłać plik o nazwie <code>ab123456.tar.gz</code>, gdzie <code>ab123456</code> to login na <code>students</code>. W paczce <code>.tar.gz</code> ma być katalog <code>chmura</code> z plikami źródłowymi <code>.java</code>.</p></li>
+</ul>
+<h1 id="walidacja">Walidacja</h1>
+<p>Rozwiązania zostaną poddane walidacji, wstępnie sprawdzającej zgodność ze specyfikacją.</p>
+<p>Na komputerze <code>students</code>, w katalogu walidacji, będzie podkatalog <code>paczki</code> z rozwiązaniami oraz podkatalog <code>walidacja</code> z plikami <a href="https://www.mimuw.edu.pl/~janowska/PW-LAB/Zadania/Zadanie1/walidacja/waliduj.sh">waliduj.sh</a> i <a href="https://www.mimuw.edu.pl/~janowska/PW-LAB/Zadania/Zadanie1/walidacja/WalidacjaChmury.java">WalidacjaChmury.java</a>.</p>
+<p>Polecenie</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sh</span> walidacja/waliduj.sh ab123456</code></pre>
+<p>przeprowadzi walidację rozwiązania studenta o identyfikatorze <code>ab123456</code>. Komunikat <code>OK</code> informuje o sukcesie.</p>
+<p>Rozwiązania, które pomyślnie przejdą walidację, zostaną dopuszczone do testów poprawności.</p>
+<hr>
+<p>Na pytania do treści zadania odpowiada <script type="text/javascript">
+<!--
+h='&#x6d;&#x69;&#x6d;&#x75;&#x77;&#46;&#x65;&#100;&#x75;&#46;&#112;&#108;';a='&#64;';n='&#122;&#x61;&#114;&#x6f;&#100;&#x61;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Artur Zaroda'+'<\/'+'a'+'>');
+// -->
+</script><a href="mailto:zaroda@mimuw.edu.pl">Artur Zaroda</a><noscript>&amp;#x41;&amp;#114;&amp;#116;&amp;#x75;&amp;#114;&amp;#32;&amp;#90;&amp;#x61;&amp;#114;&amp;#x6f;&amp;#100;&amp;#x61;&amp;#32;&amp;#40;&amp;#122;&amp;#x61;&amp;#114;&amp;#x6f;&amp;#100;&amp;#x61;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x6d;&amp;#x69;&amp;#x6d;&amp;#x75;&amp;#x77;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x65;&amp;#100;&amp;#x75;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#112;&amp;#108;&amp;#x29;</noscript>.</p>
+
+
+</body></html>
