@@ -1,22 +1,20 @@
-Zadanie zaliczeniowe 1: Chmura bytów
+## Wprowadzenie
 
-Wprowadzenie
+Chmura bytów wymiaru n przyporządkowuje bytom miejsca, jednoznacznie identyfikowane przez ciąg n współrzędnych całkowitych. Zachowuje przy tym niezmiennik chmury: każdy byt jest w innym miejscu. Chmura bytów może służyć do synchronizacji procesów współbieżnych.
 
-Chmura bytów wymiaru n przyporządkowuje bytom miejsca, jednoznacznie identyfikowane przez ciąg n współrzędnych całkowitych. Zachowuje przy tym niezmiennik chmury: każdy byt jest w innym miejscu.
-
-Chmura bytów może służyć do synchronizacji procesów współbieżnych.
-Specyfikacja
+## Specyfikacja
 
 W pakiecie chmura, implementującym w Javie chmurę bytów wymiaru 2, jest definicja typu Byt, kontrolowanego wyjątku NiebytException i klasy Chmura.
 
 Klasa Chmura ma dwa publiczne konstruktory i cztery publiczne obiektowe metody.
-
+```
     Konstruktor : Chmura()
     buduje chmurę, która w stanie początkowym nie ma żadnego bytu.
-
+```
+```
     Konstruktor : Chmura(BiPredicate<Integer, Integer> stan)
     buduje chmurę, której początkową zawartość określa dwuargumentowy predykat stan. W miejscu (x, y) jest byt wtedy i tylko wtedy, gdy stan.test(x, y) ma wartość true.
-
+```
     Metoda : Byt ustaw(int x, int y) throws InterruptedException
     daje jako wynik nowy byt, dodany do chmury w miejscu (x, y).
 
