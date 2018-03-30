@@ -1,4 +1,4 @@
-package chmura.testy;
+package testy;
 
 import chmura.Byt;
 import chmura.Chmura;
