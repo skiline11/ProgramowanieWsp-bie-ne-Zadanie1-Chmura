@@ -30,3 +30,16 @@ daje dwuelementową tablicę ze współrzędnymi x i y bytu, lub null, jeśli by
   1) Zrealizuj w Javie chmurę bytów wymiaru 2. Do pakietu chmura dołącz wszystkie potrzebne definicje pomocnicze.
   
   2) Napisz dwa programy przykładowe, demonstrujące zastosowanie chmury bytów do synchronizacji wątków. W pierwszym programie rozwiąż problem producentów i konsumentów a w drugim problem czytelników i pisarzy.
+  
+## Jak skompilować projekt ?
+uruchom skrypt wpisując : `bash compile.sh`
+  
+## Jak uruchomić moje testy ?
+Testy zawierają przykładową implementację problemów "Czytelników i pisarzy", oraz "Producentów i konsumentów". Aby je uruchomić skompiluj projekt, wejdź do folderu `chmura` i uruchom wybrany test, za pomocą jednej z komend :
+
+  `java testy.czytelnicy_i_pisarze`
+  
+  `java testy.producenci_i_konsumenci`
+
+## Chcesz przetestować Chmurę na swoich testach ?
+Dodaj swoje testy do folderu `testy`. Skompiluj projekt zgodnie z powyższymi wskazówkami, wejdź do folderu `chmura` i uruchom swój test wpisując w konsoli : `java testy.nazwa_twojego_testu`. 
