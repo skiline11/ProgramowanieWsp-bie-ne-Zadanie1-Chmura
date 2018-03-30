@@ -42,4 +42,4 @@ Testy zawierają przykładową implementację problemów "Czytelników i pisarzy
   `java testy.producenci_i_konsumenci`
 
 ## Chcesz przetestować Chmurę na swoich testach ?
-Dodaj swoje testy do folderu `testy`. Skompiluj projekt zgodnie z powyższymi wskazówkami, wejdź do folderu `chmura` i uruchom swój test wpisując w konsoli : `java testy.nazwa_twojego_testu`. 
+Dodaj swoje testy do folderu `chmura/testy`. Skompiluj projekt zgodnie z powyższymi wskazówkami, wejdź do folderu `chmura` i uruchom swój test wpisując w konsoli : `java testy.nazwa_twojego_testu`. 
